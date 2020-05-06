@@ -4,7 +4,7 @@ PImage wrook, wbishop, wknight, wqueen, wking, wpawn;
 PImage brook, bbishop, bknight, bqueen, bking, bpawn;
 
 
-int grid[][] = {
+char grid[][] = {
   {'R', 'B', 'N', 'Q', 'K', 'N', 'B', 'R'}, 
   {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'}, 
   {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
