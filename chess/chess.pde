@@ -43,19 +43,14 @@ void draw() {
 }
 
 void drawBoard() {
-  int x = 0;
-  int y = 0;
-  while (y < 8) {
-    if ( (x%2) == (y%2) ) { 
-      fill(lightbrown);
-    } else { 
-      fill(darkbrown);
-    }
-    rect(x*100, y*100, 100, 100);
-    x++;
-    if (x == 8) {
-      x = 0;
-      y++;
+  for (int r = 0; r < 8; r++) {
+    for (int c = 0; c < 8; c++) { 
+      if ( (r%2) == (c%2) ) { 
+        fill(lightbrown);
+      } else { 
+        fill(darkbrown);
+      }
+      rect(c*100, r*100, 100, 100);
     }
   }
 }
