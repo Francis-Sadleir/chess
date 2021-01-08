@@ -1,3 +1,6 @@
+import processing.net.*;
+Client myClient;
+
 color lightbrown = #FFFFC3;
 color darkbrown  = #D8864E;
 PImage wrook, wbishop, wknight, wqueen, wking, wpawn;
@@ -19,6 +22,7 @@ char grid[][] = {
 
 void setup() {
   size(800, 800);
+  myClient = new Client(this, "127.0.0.1", 1234);
 
   firstClick = true;
 
@@ -40,6 +44,18 @@ void setup() {
 void draw() {
   drawBoard();
   drawPieces();
+}
+
+void receiveMove() {
+  if (myClient.available() > 0) {
+    String incoming = myClient.readString();
+    int r1 = int(incoming.substring(0, 1));
+    int c1 = int(incoming.substring(2, 3));
+    int r2 = int(incoming.substring(4, 5));
+    int c2 = int(incoming.substring(6, 7));
+    grid[r2][c2] = grid[r1][c1];
+    grid[r1][c1] = ' ';
+  }
 }
 
 void drawBoard() {
@@ -85,6 +101,7 @@ void mouseReleased() {
     if (!(row2 == row1 && col2 == col1)) {
       grid[row2][col2] = grid[row1][col1];
       grid[row1][col1] = ' ';
+      myClient.write(row1 + "," + col1 + "," + row2 + "," + col2);
       firstClick = true;
     }
   }
